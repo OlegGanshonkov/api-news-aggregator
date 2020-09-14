@@ -33,9 +33,9 @@ abstract class ApiFactory implements ApiFactoryInterface
     public static function getFactory(ApiUserInterface $apiUser)
     {
         switch ($apiUser->getPlatform()) {
-            case MainParams::API_PLATFORM_1:
+            case $apiUser::API_PLATFORM_1:
                 return new OblivkiApiFactory($apiUser);
-            case MainParams::API_PLATFORM_2:
+            case $apiUser::API_PLATFORM_2:
                 return new Smi2ApiFactory($apiUser);;
         }
         throw new Exception('Factory not found.');

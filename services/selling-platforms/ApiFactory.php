@@ -6,6 +6,13 @@ require_once(MainParams::root() . '/services/selling-platforms/interfaces/Campai
 
 /**
  * Abstract class ApiFactory
+ * 
+ * Example:
+ * $user = new ApiUser('oblivki', $user['email']);
+ * $finance = ApiFactory::getFactory($user)->getFinance();
+ * $balance = $finance->balance();
+ * echo $balance;
+ *
  */
 abstract class ApiFactory implements ApiFactoryInterface
 {

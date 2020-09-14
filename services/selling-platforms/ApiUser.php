@@ -7,6 +7,9 @@ require_once(MainParams::root() . '/services/selling-platforms/interfaces/ApiUse
  */
 class ApiUser implements ApiUserInterface
 {
+    const API_PLATFORM_1 = 'oblivki';
+    const API_PLATFORM_2 = 'smi2';
+    
     protected $email = '';
     protected $password = '';
     protected $token = '';

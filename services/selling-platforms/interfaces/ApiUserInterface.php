@@ -27,4 +27,10 @@ interface ApiUserInterface
      */
     public function getToken(): string;
 
+    /**
+     * Get user userId
+     * @return string
+     */
+    public function getUserId(): string;
+
 }

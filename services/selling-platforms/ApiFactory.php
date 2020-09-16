@@ -6,7 +6,7 @@ require_once(MainParams::root() . '/services/selling-platforms/interfaces/Campai
 
 /**
  * Abstract class ApiFactory
- * 
+ *
  * Example:
  * $user = new ApiUser('oblivki', $user['email']);
  * $finance = ApiFactory::getFactory($user)->getFinance();
@@ -43,7 +43,11 @@ abstract class ApiFactory implements ApiFactoryInterface
             case $apiUser::API_PLATFORM_1:
                 return new OblivkiApiFactory($apiUser);
             case $apiUser::API_PLATFORM_2:
-                return new Smi2ApiFactory($apiUser);;
+                return new Smi2ApiFactory($apiUser);
+            case $apiUser::API_PLATFORM_3:
+                return new AdvertLinkApiFactory($apiUser);
+            case $apiUser::API_PLATFORM_4:
+                return new LuckyAdsApiFactory($apiUser);
         }
         throw new Exception('Factory not found.');
     }

@@ -26,6 +26,12 @@ abstract class BaseApi implements RequestInterface
     protected $headers = [];
 
     /**
+     * GET params
+     * @var array
+     */
+    protected $params = [];
+
+    /**
      * @var ApiUserInterface
      */
     protected $user;
@@ -65,7 +71,20 @@ abstract class BaseApi implements RequestInterface
      */
     public function get()
     {
-        $curl = curl_init($this->baseUrl . $this->url);
+        if ($this->params) {
+            $url = $this->baseUrl . $this->url . '?';
+            foreach ($this->params as $key => $param){
+                foreach ($param as $paramKey => $paramItem){
+                    $url .= $paramKey . '=' . $paramItem;
+                }
+                if (isset($this->params[$key + 1])){
+                    $url .= '&';
+                }
+            }
+            $curl = curl_init($url);
+        } else {
+            $curl = curl_init($this->baseUrl . $this->url);
+        }
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         if ($this->headers) {
             curl_setopt($curl, CURLOPT_HTTPHEADER, $this->headers);
@@ -150,6 +169,15 @@ abstract class BaseApi implements RequestInterface
     protected function addHeader(string $value): void
     {
         array_push($this->headers, $value);
+    }
+
+    /**
+     * Add GET params
+     * @param array $value
+     */
+    protected function addParams(array $value): void
+    {
+        array_push($this->params, $value);
     }
 
 }
